@@ -1,23 +1,11 @@
-if (data.newValue.lines[0].source == 'visitor') {
-                //update the hidden div with the visitors chat line
-                document.getElementById('visitorChat2').innerHTML = chatLine;
-                //translate the visitors chat line based on skill group
-                
-                if (skill == "Spanish") {
-                    Microsoft.Translator.Widget.Translate('es', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
-                } else if (skill == "Russian") {
-                    Microsoft.Translator.Widget.Translate('ru', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
-                } else {
-                    Microsoft.Translator.Widget.Translate('en', 'es', onProgress, onError, onComplete2, onRestoreOriginal);
-                }
-            }
+
 
 
 <html>
 
 <head>
-    <script src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/CollapsibleLists.js"></script>
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript" src="CollapsibleLists.js"></script>
     <script type="text/javascript" charset="utf8" src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
     <style>
         .collapsibleList li {
@@ -122,6 +110,23 @@ There has never been an effective and unbiased method to measure the relationshi
     <script>
         var SDK = lpTag.agentSDK;
         SDK.init();
+      
+         if (data.newValue.lines[0].source == 'visitor') {
+                //update the hidden div with the visitors chat line
+                document.getElementById('visitorChat2').innerHTML = chatLine;
+                //translate the visitors chat line based on skill group
+                
+                if (skill == "Spanish") {
+                    Microsoft.Translator.Widget.Translate('es', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
+                } else if (skill == "Russian") {
+                    Microsoft.Translator.Widget.Translate('ru', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
+                } else {
+                    Microsoft.Translator.Widget.Translate('en', 'es', onProgress, onError, onComplete2, onRestoreOriginal);
+                }
+            }
+      
+      
+      
         // make the appropriate lists collapsible
         CollapsibleLists.apply();
         $(".pitem > .item").click(function() {
