@@ -111,7 +111,6 @@ There has never been an effective and unbiased method to measure the relationshi
         var SDK = lpTag.agentSDK;
         SDK.init();
       
-        alert("ciaoprimo");
         var updateCallback = function(data) {
             
             alert("ciao");
@@ -119,7 +118,7 @@ There has never been an effective and unbiased method to measure the relationshi
             var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
            
             if (data.newValue.lines[0].source == 'visitor') {
-              
+                alert(chatLine);
                 document.getElementById('filterinput').innerHTML = chatLine;
             
             }
