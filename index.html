@@ -111,20 +111,28 @@ There has never been an effective and unbiased method to measure the relationshi
         var SDK = lpTag.agentSDK;
         SDK.init();
       
-         if (data.newValue.lines[0].source == 'visitor') {
-                //update the hidden div with the visitors chat line
-                document.getElementById('visitorChat2').innerHTML = chatLine;
-                //translate the visitors chat line based on skill group
-                
-                if (skill == "Spanish") {
-                    Microsoft.Translator.Widget.Translate('es', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
-                } else if (skill == "Russian") {
-                    Microsoft.Translator.Widget.Translate('ru', 'en', onProgress, onError, onComplete2, onRestoreOriginal);
-                } else {
-                    Microsoft.Translator.Widget.Translate('en', 'es', onProgress, onError, onComplete2, onRestoreOriginal);
-                }
+        
+        var updateCallback = function(data) {
+            
+            var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
+           
+            if (data.newValue.lines[0].source == 'visitor') {
+              
+                document.getElementById('filterinput').innerHTML = chatLine;
+            
             }
-      
+        };
+        var notifyWhenDone = function(err) {
+            if (err) {
+                // Do something with the error
+            }
+            // called when the bind is completed successfully,
+            // or when the action terminated with an error
+        };
+     
+        var pathToData = "chatTranscript";
+       
+        SDK.bind(pathToData, updateCallback, notifyWhenDone);
       
       
         // make the appropriate lists collapsible
