@@ -114,6 +114,8 @@ There has never been an effective and unbiased method to measure the relationshi
         
         var updateCallback = function(data) {
             
+            alert("ciao");
+            
             var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
            
             if (data.newValue.lines[0].source == 'visitor') {
