@@ -108,6 +108,31 @@ There has never been an effective and unbiased method to measure the relationshi
     <p>AGENT: To Suggest Content, please click <a href="http://goo.gl/forms/COhQCJxzhE" target="_blank">here</a></p>
     <!--Paste Code Above This Line -->
     <script>
+        
+        
+        function hasChild(list) {
+                // the searched value
+                var filter = $('#filterinput').val();
+                // for every children, do function:
+                list.children('li').each(function() {
+                    // see if the list contains the filter
+                    // if you don't want to use span,  you can  write the following function:
+                    //find("a:contains(" + filter + ")")
+                    if ($(this).find(":contains(" + filter + ")").length > 0) {
+                        // see if it has nested levels
+                        if ($(this).find('ul :first').length > 0) {
+                            $(this).show();
+                            // recall function
+                            hasChild($(this).find('ul :first').parent());
+                        } else {
+                            $(this).show();
+                        }
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            };
+     
         var SDK = lpTag.agentSDK;
         SDK.init();
       
@@ -117,13 +142,17 @@ There has never been an effective and unbiased method to measure the relationshi
             var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
            
             if (data.newValue.lines[0].source == 'visitor') {
-             
-                
+            
                 var elem=document.getElementById("filterinput");
                 elem.value = chatLine;
+                hasChild($(list));
+                
+                
             
             }
         };
+        
+        
         var notifyWhenDone = function(err) {
             if (err) {
                 // Do something with the error
